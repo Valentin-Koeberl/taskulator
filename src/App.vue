@@ -1,30 +1,32 @@
 <template>
   <div id="app">
-    <CreateTodo />
-    <TodoList />
+    <h1>Taskulator</h1>
+    <br>
+    <TodoForm @add-todo="addTodo" />
+    <TodoList ref="list" />
   </div>
 </template>
 
 <script>
-import CreateTodo from './components/CreateTodo.vue'
-import TodoList from './components/TodoList.vue'
+import TodoForm from './components/TodoForm.vue';
+import TodoList from './components/TodoList.vue';
 
 export default {
   name: 'App',
-  components: {
-    CreateTodo,
-    TodoList
-  }
-}
+  components: { TodoForm, TodoList },
+  methods: {
+    addTodo(todo) {
+      this.$refs.list.addTodo(todo);
+    },
+  },
+};
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 </style>
