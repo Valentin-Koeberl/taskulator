@@ -1,34 +1,13 @@
 <template>
   <div class="todo-item">
-    <span>{{ todo.description }}</span>
-    <span>({{ age }})</span>
-    <button @click="completeTodo">Mark as Completed</button>
+    <slot name="description"></slot>
+    <slot name="actions"></slot>
   </div>
 </template>
 
 <script>
-import { computed } from 'vue';
-
 export default {
   name: 'TodoItem',
-  props: ['todo'],
-  emits: ['complete'],
-  setup(props, { emit }) {
-    const age = computed(() => {
-      const now = new Date();
-      const ageInMs = now - new Date(props.todo.timestamp);
-      const days = Math.floor(ageInMs / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((ageInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((ageInMs % (1000 * 60 * 60)) / (1000 * 60));
-      return `${days}d ${hours}h ${minutes}m`;
-    });
-
-    const completeTodo = () => {
-      emit('complete', props.todo.id);
-    };
-
-    return { age, completeTodo };
-  },
 };
 </script>
 
@@ -39,17 +18,13 @@ export default {
   align-items: center;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  transition: all 0.3s ease;
 }
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #0056b3;
+
+.todo-item:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 </style>
