@@ -1,11 +1,16 @@
 <template>
-  <transition-group name="fade" tag="div" class="todo-list">
-    <div v-for="(todo, index) in todos" :key="todo.timestamp" class="todo-item">
+  <transition-group name="fade" tag="ul" class="todo-list fade">
+    <li
+        v-for="(todo, index) in todos"
+        :key="todo.timestamp"
+        class="todo-item"
+    >
       <p class="todo-text">{{ todo.description }}</p>
       <span class="todo-time">{{ formatAge(todo.timestamp) }}</span>
       <button @click="$emit('remove-todo', index)">Complete</button>
-    </div>
+    </li>
   </transition-group>
+
 </template>
 
 <script>
@@ -45,9 +50,9 @@ export default {
 
 .todo-text {
   flex: 1;
-  white-space: normal; /* Ermöglicht Zeilenumbrüche */
-  word-wrap: break-word; /* Bricht den Text, wenn er die Breite überschreitet */
-  max-width: calc(20ch); /* 20 Zeichen (ch ist die Breite eines '0') */
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: calc(20ch);
 }
 
 .todo-time {
@@ -56,15 +61,22 @@ export default {
   color: gray;
 }
 
-/* CSS-Transition für Fade-In/Fade-Out */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+  transform: translateY(-10px);
 }
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 </style>
 

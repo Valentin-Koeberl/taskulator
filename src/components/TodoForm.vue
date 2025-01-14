@@ -22,7 +22,6 @@ export default {
     const warningMessage = ref('');
     const inputRef = ref(null);
 
-    // Watcher: Zeichenlimit überwachen
     watch(description, (newValue) => {
       if (newValue.length > 50) {
         warningMessage.value = 'Character limit exceeded! Max 50 characters allowed.';
@@ -31,7 +30,6 @@ export default {
       }
     });
 
-    // TODO hinzufügen
     const handleSubmit = () => {
       if (description.value.trim() && description.value.length <= 50) {
         emit('add-todo', {

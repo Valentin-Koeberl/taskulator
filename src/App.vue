@@ -15,13 +15,11 @@ export default {
   name: 'App',
   components: { TodoForm, TodoList },
   mounted() {
-    document.title = 'Tasktulator - Dein Todo Manager'; // Setzt den Titel, wenn die Komponente gemountet wird
+    document.title = 'Tasktulator - Dein Todo Manager';
   },
   setup() {
-    // TODO-Liste als reaktive Referenz
     const todos = ref([]);
 
-    // LocalStorage: TODOs laden
     onMounted(() => {
       const savedTodos = localStorage.getItem('todos');
       if (savedTodos) {
@@ -29,7 +27,6 @@ export default {
       }
     });
 
-    // LocalStorage: TODOs speichern, wenn sie sich ändern
     watch(
         todos,
         (newTodos) => {
@@ -38,17 +35,14 @@ export default {
         {deep: true}
     );
 
-    // TODO hinzufügen
     const addTodo = (todo) => {
       todos.value.push(todo);
     };
 
-    // TODO-Status toggeln (optional für zukünftige Features)
     const toggleTodo = (index) => {
       todos.value[index].completed = !todos.value[index].completed;
     };
 
-    // TODO entfernen
     const removeTodo = (index) => {
       todos.value.splice(index, 1);
     };
