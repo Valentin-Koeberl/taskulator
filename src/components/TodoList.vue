@@ -1,21 +1,26 @@
 <template>
   <transition-group name="fade" tag="ul" class="todo-list fade">
-    <li
+    <TodoItem
         v-for="(todo, index) in todos"
         :key="todo.timestamp"
         class="todo-item"
     >
-      <p class="todo-text">{{ todo.description }}</p>
-      <span class="todo-time">{{ formatAge(todo.timestamp) }}</span>
-      <button @click="$emit('remove-todo', index)">Complete</button>
-    </li>
+      <template #default>
+        <p class="todo-text">{{ todo.description }}</p>
+        <span class="todo-time">{{ formatAge(todo.timestamp) }}</span>
+        <button @click="$emit('remove-todo', index)">Complete</button>
+      </template>
+    </TodoItem>
   </transition-group>
-
 </template>
 
+
 <script>
+import TodoItem from "@/components/TodoItem.vue";
+
 export default {
   name: 'TodoList',
+  components: {TodoItem},
   props: {
     todos: {
       type: Array,

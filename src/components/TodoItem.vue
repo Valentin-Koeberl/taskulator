@@ -1,13 +1,12 @@
 <template>
-  <div class="todo-item">
-    <slot name="description"></slot>
-    <slot name="actions"></slot>
-  </div>
+  <li class="todo-object">
+    <slot></slot>
+  </li>
 </template>
 
 <script>
 export default {
-  name: 'TodoItem',
+  name: "TodoItem",
 };
 </script>
 
@@ -17,14 +16,10 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
   margin-bottom: 10px;
-  background-color: #fff;
-  transition: all 0.3s ease;
-}
-
-.todo-item:hover {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 </style>
